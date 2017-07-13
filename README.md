@@ -7,6 +7,8 @@ library(wordcloud2)
 library(tm)
 library(SnowballC)
 library(wordcloud)
+library(readxl)
+library(xlsx)
 
 Users can launch app by running the following command in R console:
 runGitHub( "R_WordCloud", "vinitg91") 
