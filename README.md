@@ -12,3 +12,5 @@ library(xlsx)
 
 Users can launch app by running the following command in R console:
 runGitHub( "R_WordCloud", "vinitg91") 
+
+Or visit https://vinitg.shinyapps.io/r_wordcloud/
