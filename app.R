@@ -57,7 +57,7 @@ server <- function(input, output) {
   wc = eventReactive(input$load,{
     if(is.null(data1())){return()}
   
-    t = data1()$letlifein #store the text column in variable 't'
+    t = data1()$cloud #store the text column in variable 't'
     t = as.character(t)
     #Make sure everything is ASCII. Remove everything that is non-ASCII
     Encoding(t)="latin1" 
