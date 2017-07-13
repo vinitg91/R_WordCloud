@@ -13,6 +13,8 @@ library(wordcloud2)
 library(tm)
 library(SnowballC)
 library(wordcloud)
+library(readxl)
+library(xlsx)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -21,11 +23,12 @@ ui <- fluidPage(
       
       radioButtons("fType","Select type of file to load",
                    choices = list("Excel","CSV"),selected = "Excel"),
+      h6("*Name of column containing text should be: 'cloud'"),
       fileInput(inputId = "TextFile",label = "Choose File"),
       #fileInput(inputId = "Image",label = "Choose Image"),
       textInput("Exclude","Exclude words from cloud"),
       textInput("Shape","Shape of cloud"),
-      h6("circle (default), cardioid , diamond (alias of square), 
+      h6("Options: circle, cardioid, diamond, 
          triangle-forward, triangle, pentagon, and star"),
       actionButton("load","Generate")
     ),
@@ -50,7 +53,7 @@ server <- function(input, output) {
         if(input$fType=="Excel")
               f = read.xlsx(file1$datapath,sheetIndex = 1)
         if(input$fType=="CSV")
-              f = read.table(file = file1$datapath,header = T,sep = ",")
+              f = read.csv(file = file1$datapath)
         return(f)
   }) 
   
@@ -103,7 +106,7 @@ server <- function(input, output) {
   output$wordcloud = renderWordcloud2({
     if(is.null(wc())){return()}
     image1 = input$Image
-    wordcloud2(data = wc() ,size = 1,minRotation = -pi/6, maxRotation = -pi/6,
+    wordcloud2(data = wc() ,size = 1,minRotation = -pi/6, maxRotation = pi/6,
                rotateRatio = 1, shape = input$Shape )
   })
   
